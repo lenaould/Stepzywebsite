@@ -1,0 +1,1 @@
+export default function Footer(){return <footer className="border-t border-sky/40 bg-white px-6 py-10 text-center text-ocean/60"><p className="text-2xl font-black text-ocean">Step<span className="text-cyan">zy</span></p><p className="mt-1">Your step, our move.</p><p className="mt-2 text-sm">© 2026 Stepzy. English Practice Club.</p></footer>}

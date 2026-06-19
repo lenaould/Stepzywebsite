@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f8fbfd;
+}
+
+.stepzy-input {
+  margin-bottom: 0.75rem;
+  width: 100%;
+  border-radius: 1rem;
+  border: 1px solid rgba(142, 202, 230, 0.6);
+  background: white;
+  padding: 1rem 1.25rem;
+  color: #0f172a;
+  outline: none;
+}
+
+.stepzy-input:focus {
+  border-color: #219ebc;
+}
