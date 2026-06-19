@@ -35,12 +35,12 @@ export default function Join() {
     "Wednesday",
     "Thursday",
   ];
+  const levels = ["Beginner", "Intermediate", "Advanced"];
+  const times = ["Morning", "Afternoon", "Evening"];
+  const plans = ["Basic", "Regular", "Premium", "Pay per session"];
 
   function updateField(name, value) {
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setForm((prev) => ({ ...prev, [name]: value }));
   }
 
   function toggleDay(day) {
@@ -60,9 +60,7 @@ export default function Join() {
       await fetch(SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
-        headers: {
-          "Content-Type": "text/plain",
-        },
+        headers: { "Content-Type": "text/plain" },
         body: JSON.stringify(form),
       });
 
@@ -116,7 +114,6 @@ export default function Join() {
               value={form.firstName}
               onChange={(e) => updateField("firstName", e.target.value)}
             />
-
             <input
               required
               className="stepzy-input"
@@ -124,7 +121,6 @@ export default function Join() {
               value={form.lastName}
               onChange={(e) => updateField("lastName", e.target.value)}
             />
-
             <input
               required
               className="stepzy-input"
@@ -132,7 +128,6 @@ export default function Join() {
               value={form.phone}
               onChange={(e) => updateField("phone", e.target.value)}
             />
-
             <input
               className="stepzy-input"
               type="email"
@@ -140,14 +135,12 @@ export default function Join() {
               value={form.email}
               onChange={(e) => updateField("email", e.target.value)}
             />
-
             <input
               className="stepzy-input"
               placeholder="Age"
               value={form.age}
               onChange={(e) => updateField("age", e.target.value)}
             />
-
             <input
               className="stepzy-input"
               placeholder="City"
@@ -156,57 +149,34 @@ export default function Join() {
             />
           </div>
 
-          <select
-            className="stepzy-input"
+          <OptionGroup
+            title="Level"
+            options={levels}
             value={form.level}
-            onChange={(e) => updateField("level", e.target.value)}
-          >
-            <option>Beginner</option>
-            <option>Intermediate</option>
-            <option>Advanced</option>
-          </select>
+            onChange={(value) => updateField("level", value)}
+          />
 
-          <p className="mb-3 font-bold text-[#023047] dark:text-white">
-            Preferred days
-          </p>
+          <OptionGroup
+            title="Preferred days"
+            options={days}
+            value={form.days}
+            multiple
+            onChange={toggleDay}
+          />
 
-          <div className="mb-5 flex flex-wrap gap-2">
-            {days.map((day) => (
-              <button
-                key={day}
-                type="button"
-                onClick={() => toggleDay(day)}
-                className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${
-                  form.days.includes(day)
-                    ? "bg-[#219EBC] text-white"
-                    : "border-[#8ECAE6]/60 bg-white text-[#023047]"
-                }`}
-              >
-                {day}
-              </button>
-            ))}
-          </div>
-
-          <select
-            className="stepzy-input"
+          <OptionGroup
+            title="Preferred time"
+            options={times}
             value={form.time}
-            onChange={(e) => updateField("time", e.target.value)}
-          >
-            <option>Morning</option>
-            <option>Afternoon</option>
-            <option>Evening</option>
-          </select>
+            onChange={(value) => updateField("time", value)}
+          />
 
-          <select
-            className="stepzy-input"
+          <OptionGroup
+            title="Plan"
+            options={plans}
             value={form.plan}
-            onChange={(e) => updateField("plan", e.target.value)}
-          >
-            <option>Basic</option>
-            <option>Regular</option>
-            <option>Premium</option>
-            <option>Pay per session</option>
-          </select>
+            onChange={(value) => updateField("plan", value)}
+          />
 
           <textarea
             rows="4"
@@ -238,5 +208,34 @@ export default function Join() {
         </motion.form>
       </div>
     </section>
+  );
+}
+
+function OptionGroup({ title, options, value, onChange, multiple = false }) {
+  return (
+    <div className="mb-5">
+      <p className="mb-3 font-bold text-[#023047] dark:text-white">{title}</p>
+
+      <div className="flex flex-wrap gap-2">
+        {options.map((option) => {
+          const active = multiple ? value.includes(option) : value === option;
+
+          return (
+            <button
+              key={option}
+              type="button"
+              onClick={() => onChange(option)}
+              className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${
+                active
+                  ? "border-[#219EBC] bg-[#219EBC] text-white"
+                  : "border-[#8ECAE6]/60 bg-white text-[#023047] hover:bg-[#219EBC]/10 dark:border-[#219EBC]/20 dark:bg-[#0B3A57] dark:text-white"
+              }`}
+            >
+              {option}
+            </button>
+          );
+        })}
+      </div>
+    </div>
   );
 }
