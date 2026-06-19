@@ -121,23 +121,6 @@ export default function Pricing() {
           </motion.div>
         ))}
       </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="mt-10 rounded-[2rem] border border-[#8ECAE6]/50 bg-white p-8 text-center dark:border-[#219EBC]/20 dark:bg-[#0B3A57]"
-      >
-        <h3 className="text-2xl font-black text-[#023047] dark:text-white">
-          {t.paySessionTitle}
-        </h3>
-
-        <p className="mt-4 text-5xl font-black text-[#219EBC]">1,500 DZD</p>
-
-        <p className="mt-3 text-slate-500 dark:text-[#8ECAE6]">
-          {t.paySessionText}
-        </p>
-      </motion.div>
     </section>
   );
 }
